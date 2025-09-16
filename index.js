@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 const userRouter = require("./routes/userRouter");
 const productRouter = require("./routes/productRouter");
+const cartRouter = require("./routes/cartRouter");
 const cloudinary = require("cloudinary").v2;
 
 // middleware
@@ -15,6 +16,7 @@ app.use(cors());
 //api endpoints
 app.use("/api/user", userRouter);
 app.use("/api/product", productRouter);
+app.use("/api/cart", cartRouter);
 
 //cloudinary config
 cloudinary.config({
