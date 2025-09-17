@@ -1,3 +1,6 @@
+const ORDER = require("../models/order");
+const USER = require("../models/user");
+
 // Placing order using COD method
 const placeOrder = async (req, res) => {
   try {
@@ -5,9 +8,21 @@ const placeOrder = async (req, res) => {
     const orderData = {
       userId,
       items,
+      address,
       amount,
+      paymentMethod: "COD",
+      payment: false,
+      date: Date.now(),
     };
-  } catch (error) {}
+    await ORDER.create(orderData);
+
+    await USER.findByIdAndUpdate(userId, { cartData: {} });
+
+    res.status(200).json({ success: true, message: "Order Placed" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: error.message });
+  }
 };
 
 // Placing orders using Stripe Method
