@@ -32,7 +32,16 @@ const placeOrderStripe = async (req, res) => {};
 const allOrders = async (req, res) => {};
 
 //User Order Data for Frontend
-const userOrders = async (req, res) => {};
+const userOrders = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const orders = await ORDER.find({ userId });
+    res.status(200).json({ success: true, orders });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 
 // update order status
 const updateStatus = async (req, res) => {};
