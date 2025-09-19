@@ -58,7 +58,7 @@ const addProduct = async (req, res) => {
 //func to list product
 const listProduct = async (req, res) => {
   try {
-    const products = await PRODUCT.find({});
+    const products = await PRODUCT.find({}).sort({ createdAt: -1 });
     const totalProducts = await PRODUCT.countDocuments();
     res.status(200).json({ success: true, totalProducts, products });
   } catch (error) {
