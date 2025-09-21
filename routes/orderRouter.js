@@ -15,9 +15,7 @@ const {
 router.post("/list", adminAuth, allOrders);
 router.post("/status", adminAuth, updateStatus);
 
-//payment features
 router.post("/place", authUser, placeOrder);
-router.post("/stripe", authUser, placeOrderStripe);
 
 //user feature
 router.post("/userorders", authUser, userOrders);

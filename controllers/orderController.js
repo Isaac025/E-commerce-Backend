@@ -25,8 +25,7 @@ const placeOrder = async (req, res) => {
   }
 };
 
-// Placing orders using Stripe Method
-const placeOrderStripe = async (req, res) => {};
+
 
 // all orders for admin panel
 const allOrders = async (req, res) => {
