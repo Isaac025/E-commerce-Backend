@@ -67,7 +67,6 @@ const updateStatus = async (req, res) => {
 
 module.exports = {
   placeOrder,
-  placeOrderStripe,
   allOrders,
   userOrders,
   updateStatus,

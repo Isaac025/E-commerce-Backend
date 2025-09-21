@@ -5,7 +5,6 @@ const authUser = require("../middleware/auth");
 const router = express.Router();
 const {
   placeOrder,
-  placeOrderStripe,
   allOrders,
   updateStatus,
   userOrders,
