@@ -1,21 +1,25 @@
 const ORDER = require("../models/order");
 const USER = require("../models/user");
 
-// Placing order using COD method
+// Placing order using COD or Bank Transfer
 const placeOrder = async (req, res) => {
   try {
-    const { userId, items, amount, address } = req.body;
+    const { userId, items, amount, address, paymentMethod } = req.body;
+
+    // fallback to COD if nothing passed
     const orderData = {
       userId,
       items,
       address,
       amount,
-      paymentMethod: "COD",
+      paymentMethod: paymentMethod || "COD",
       payment: false,
       date: Date.now(),
     };
+
     await ORDER.create(orderData);
 
+    // clear user cart
     await USER.findByIdAndUpdate(userId, { cartData: {} });
 
     res.status(200).json({ success: true, message: "Order Placed" });
@@ -24,8 +28,6 @@ const placeOrder = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
-
-
 
 // all orders for admin panel
 const allOrders = async (req, res) => {
