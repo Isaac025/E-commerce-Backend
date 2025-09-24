@@ -1,18 +1,17 @@
 const ORDER = require("../models/order");
 const USER = require("../models/user");
 
-// Placing order using COD or Bank Transfer
+// Placing order using Crypto or Bank Transfer
 const placeOrder = async (req, res) => {
   try {
     const { userId, items, amount, address, paymentMethod } = req.body;
 
-    // fallback to COD if nothing passed
     const orderData = {
       userId,
       items,
       address,
       amount,
-      paymentMethod: paymentMethod || "COD",
+      paymentMethod: paymentMethod || "crypto", // 🔴 default to crypto
       payment: false,
       date: Date.now(),
     };
